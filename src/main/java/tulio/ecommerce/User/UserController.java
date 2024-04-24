@@ -24,18 +24,39 @@ public class UserController {
             return ResponseEntity.badRequest().body("Ausencia de dados");
         
         }
+        
+        //verify if login name already exists
+        if(userRepository.findbylogin(userModel.login) != null)
+        {
+            return ResponseEntity.badRequest().body("Login já existente");
+        }
+
         this.userRepository.save(userModel);
         return ResponseEntity.ok().body("Cadastrado com sucesso!");
     }
 
+    //to do Melhorar login com Spring Security
     @PostMapping("/login")
-    public String login(@RequestHeader("Authorization") String authString)
+    public ResponseEntity<String> login(@RequestHeader("Authorization") String authString)
     {
         authString =  authString.substring("Basic".length()).trim();
         String decodedauth = new String(Base64.getDecoder().decode(authString));
         String[] credential = decodedauth.split(":");
 
-        return credential[0] + " " + credential[1];
+        UserModel user = userRepository.findbylogin(credential[0]);
         
+        if(user == null)
+        {
+            return ResponseEntity.badRequest().body("Login não encontrado");
+        }
+
+        if(!user.password.equals(credential[1]))
+        {
+            return ResponseEntity.badRequest().body("senha invalida");
+        }
+
+        return ResponseEntity.ok().body("login com sucesso!");
+
+
     }
 }
