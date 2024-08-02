@@ -31,7 +31,7 @@ public class UserModel implements UserDetails {
     @Column(columnDefinition = "double default 0.0")
     double saldo;
 
-    UserRole role;
+    public UserRole role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
