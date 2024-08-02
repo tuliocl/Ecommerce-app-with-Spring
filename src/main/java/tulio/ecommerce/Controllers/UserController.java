@@ -1,4 +1,4 @@
-package tulio.ecommerce.User;
+package tulio.ecommerce.Controllers;
 
 import java.util.Base64;
 
@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import tulio.ecommerce.Repositories.UserRepository;
+import tulio.ecommerce.User.UserModel;
 
 @RestController
 @RequestMapping("/")
@@ -33,30 +36,5 @@ public class UserController {
 
         this.userRepository.save(userModel);
         return ResponseEntity.ok().body("Cadastrado com sucesso!");
-    }
-
-    //to do Melhorar login com Spring Security
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestHeader("Authorization") String authString)
-    {
-        authString =  authString.substring("Basic".length()).trim();
-        String decodedauth = new String(Base64.getDecoder().decode(authString));
-        String[] credential = decodedauth.split(":");
-
-        UserModel user = userRepository.findbylogin(credential[0]);
-        
-        if(user == null)
-        {
-            return ResponseEntity.badRequest().body("Login não encontrado");
-        }
-
-        if(!user.password.equals(credential[1]))
-        {
-            return ResponseEntity.badRequest().body("senha invalida");
-        }
-
-        return ResponseEntity.ok().body("login com sucesso!");
-
-
     }
 }

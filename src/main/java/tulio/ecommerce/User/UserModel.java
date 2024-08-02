@@ -21,9 +21,9 @@ public class UserModel implements UserDetails {
     @GeneratedValue(generator = "UUID")
     UUID id;
     
-    String login;
+    public String login;
     
-    String password;
+    public String password;
     
     @Column(columnDefinition = "double default 0.0")
     double limite;
