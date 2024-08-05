@@ -26,9 +26,11 @@ public class SecurityConfiguration {
         .headers(httpSecurityHeadersConfigurer -> {
             httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable);
          })
-        //.authorizeHttpRequests(authorize -> authorize 
+        .authorizeHttpRequests(authorize -> authorize 
             //.requestMatchers(HttpMethod.POST, "/addProduct").hasRole("ADMIN")
-            //.anyRequest().authenticated())
+            .requestMatchers(HttpMethod.POST, "/login").permitAll()
+            .requestMatchers(HttpMethod.POST, "/cadastro").permitAll()
+            .anyRequest().authenticated())
         .build();
     }
 
@@ -43,5 +45,7 @@ public class SecurityConfiguration {
     {
         return new BCryptPasswordEncoder();
     }
+
+    
     
 }
