@@ -62,7 +62,7 @@ public class UserController {
     }
 
     @PostMapping("/addProduct")
-    public void addProduct(@RequestBody UserModel usermodel)
+    public void addProduct()
     {
         System.out.println("IHUUUU");
     }

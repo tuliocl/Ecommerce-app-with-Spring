@@ -35,19 +35,16 @@ public class TokenService {
         }
     }   
 
-    public String ValidateToken(String token)
-    {
-        try
-        {
+    public String validateToken(String token) {
+        try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
                 .withIssuer("project-Back")
                 .build()
                 .verify(token)
                 .getSubject();
-        } catch (JWTVerificationException e)
-        {
-            return "";
+        } catch (JWTVerificationException e) {
+            return null;
         }
     }
 
