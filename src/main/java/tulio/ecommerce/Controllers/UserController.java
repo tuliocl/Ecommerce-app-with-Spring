@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import tulio.ecommerce.Repositories.UserRepository;
-import tulio.ecommerce.Services.TokenService;
+import tulio.ecommerce.Security.TokenService;
 import tulio.ecommerce.User.UserModel;
 
 @RestController
@@ -59,11 +59,5 @@ public class UserController {
         //System.out.println(auth);
 
         return ResponseEntity.ok(token);
-    }
-
-    @PostMapping("/addProduct")
-    public void addProduct()
-    {
-        System.out.println("IHUUUU");
     }
 }

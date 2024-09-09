@@ -21,15 +21,16 @@ public class UserModel implements UserDetails {
     @GeneratedValue(generator = "UUID")
     UUID id;
     
+    @Column
     public String login;
     
     public String password;
     
     @Column(columnDefinition = "double default 0.0")
-    double limite;
+    double credit;
     
     @Column(columnDefinition = "double default 0.0")
-    double saldo;
+    double balance;
 
     public UserRole role;
 

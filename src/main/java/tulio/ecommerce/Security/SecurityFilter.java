@@ -14,7 +14,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import tulio.ecommerce.Repositories.UserRepository;
-import tulio.ecommerce.Services.TokenService;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter{
