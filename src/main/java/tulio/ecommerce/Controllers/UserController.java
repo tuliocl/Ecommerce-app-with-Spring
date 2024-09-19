@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import tulio.ecommerce.Models.User.UserModel;
 import tulio.ecommerce.Repositories.UserRepository;
-import tulio.ecommerce.Security.TokenService;
-import tulio.ecommerce.User.UserModel;
+import tulio.ecommerce.Services.TokenService;
 
 @RestController
 @RequestMapping("/")

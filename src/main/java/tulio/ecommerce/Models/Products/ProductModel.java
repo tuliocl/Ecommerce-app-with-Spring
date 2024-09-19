@@ -1,4 +1,4 @@
-package tulio.ecommerce.Products;
+package tulio.ecommerce.Models.Products;
 
 import java.util.UUID;
 

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tulio.ecommerce.Products.ProductModel;
+import tulio.ecommerce.Models.Products.ProductModel;
 import tulio.ecommerce.Repositories.ProductRepository;
 
 @RestController
@@ -25,6 +25,12 @@ public class ProductController {
     @Autowired
     ProductRepository productRepository;
 
+    @GetMapping("/listAll")
+    public ResponseEntity<List<ProductModel>> GetAllProducts()
+    {
+        return ResponseEntity.ok().body(productRepository.findAll());
+    }
+    
     @PostMapping("/add")
     public ResponseEntity<String> AddProduct(@RequestBody ProductModel productModel)
     {
@@ -38,11 +44,6 @@ public class ProductController {
         return ResponseEntity.ok().body("Produto adicionado com sucesso");
     }
     
-    @GetMapping("/listAll")
-    public ResponseEntity<List<ProductModel>> GetAllProducts()
-    {
-        return ResponseEntity.ok().body(productRepository.findAll());
-    }
 
     @GetMapping("/{id}/info")
     public ResponseEntity<Optional<ProductModel>> GetProductInfo(@PathVariable(value="id") UUID id)
@@ -54,7 +55,7 @@ public class ProductController {
     public ResponseEntity<String> AttProductInfo(@PathVariable(value="id") UUID id, @RequestBody ProductModel productModel)
     {
         Optional<ProductModel> product = productRepository.findById(id);
-        if(product == null)
+        if(product.isEmpty())
         {
             return ResponseEntity.badRequest().body("Produto não encontrado");
         }

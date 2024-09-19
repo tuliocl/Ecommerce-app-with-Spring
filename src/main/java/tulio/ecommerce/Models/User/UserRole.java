@@ -1,4 +1,4 @@
-package tulio.ecommerce.User;
+package tulio.ecommerce.Models.User;
 
 public enum UserRole {
     ADMIN("admin"),

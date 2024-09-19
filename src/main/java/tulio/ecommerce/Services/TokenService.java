@@ -1,4 +1,4 @@
-package tulio.ecommerce.Security;
+package tulio.ecommerce.Services;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -12,7 +12,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 
-import tulio.ecommerce.User.UserModel;
+import tulio.ecommerce.Models.User.UserModel;
 
 @Service
 public class TokenService {

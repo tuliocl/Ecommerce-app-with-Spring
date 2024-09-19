@@ -1,4 +1,4 @@
-package tulio.ecommerce.User;
+package tulio.ecommerce.Models.User;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -6,7 +6,11 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
+import tulio.ecommerce.Models.Cart.CartModel;
 
 import java.util.Collection;
 import java.util.List;
@@ -26,7 +30,12 @@ public class UserModel implements UserDetails {
     @Column
     public String login;
     
+    //@Column
     public String password;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id")
+    private CartModel cart = new CartModel();
     
     @Column(columnDefinition = "double default 0.0")
     double credit;
