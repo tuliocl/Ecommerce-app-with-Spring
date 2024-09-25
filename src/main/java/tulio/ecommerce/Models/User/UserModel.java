@@ -35,7 +35,7 @@ public class UserModel implements UserDetails {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id")
-    private CartModel cart = new CartModel();
+    public CartModel cart = new CartModel();
     
     @Column(columnDefinition = "double default 0.0")
     double credit;
