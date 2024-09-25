@@ -1,5 +1,8 @@
 package tulio.ecommerce.Services;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -37,5 +40,31 @@ public class CartService {
         cartRepository.save(cart);
 
         return HttpStatus.OK;
+    }
+
+    public List<ProductModel> ListCartLogic(UUID id)
+    {
+        Optional<CartModel> cartOpt = cartRepository.findById(id);
+
+        if (cartOpt.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        CartModel cart = cartOpt.get();
+        List<UUID> productIds = cart.getItems();
+        
+        List<ProductModel> products =  new ArrayList<ProductModel>();
+        for(UUID item : productIds)
+        {
+            Optional<ProductModel> prodcutOpt = productRepository.findById(item);
+            if(!prodcutOpt.isEmpty())
+            {
+                ProductModel existingProduct = prodcutOpt.get();
+                products.add(existingProduct);
+            }
+            
+        }
+
+        return products;
     }
 }

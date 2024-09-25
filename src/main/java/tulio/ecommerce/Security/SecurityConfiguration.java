@@ -33,6 +33,7 @@ public class SecurityConfiguration {
          })
         .authorizeHttpRequests(authorize -> authorize 
             .requestMatchers(HttpMethod.POST,"/cart/att").permitAll()
+            .requestMatchers(HttpMethod.GET,"/cart/list/{}").permitAll()
 
             .requestMatchers(HttpMethod.POST, "/products/add").hasRole("ADMIN")
             .requestMatchers(HttpMethod.PUT, "{id}/att").hasRole("ADMIN")

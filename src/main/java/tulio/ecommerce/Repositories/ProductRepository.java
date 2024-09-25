@@ -1,5 +1,6 @@
 package tulio.ecommerce.Repositories;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -14,6 +15,8 @@ public interface ProductRepository extends JpaRepository<ProductModel,UUID> {
     @Query("SELECT p FROM TB_product p WHERE p.name LIKE %:name%")
     ProductModel findbyname(@Param("name") String name);
     Optional<ProductModel>  findById(@Param("id") UUID id);
+
+    List<ProductModel> findAllById(Iterable<UUID> ids);
 
     void deleteById(UUID id);
 }
