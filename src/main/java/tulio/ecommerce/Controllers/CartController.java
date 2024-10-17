@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tulio.ecommerce.Models.Cart.AddItemRequest;
+import tulio.ecommerce.Models.Cart.CartDTO;
+import tulio.ecommerce.Models.Cart.CartProductRequest;
 import tulio.ecommerce.Models.Products.ProductModel;
 import tulio.ecommerce.Repositories.CartRepository;
 import tulio.ecommerce.Repositories.ProductRepository;
@@ -34,9 +36,9 @@ public class CartController {
     CartService cartService;
 
     @PostMapping("/add")
-    public ResponseEntity<String> AddItemToCart(@RequestBody AddItemRequest request,@RequestHeader(HttpHeaders.AUTHORIZATION) String token)
+    public ResponseEntity<String> AddItemToCart(@RequestBody CartProductRequest request,@RequestHeader(HttpHeaders.AUTHORIZATION) String token)
     {
-
+        System.out.println(token);
         HttpStatus response = cartService.AddItemLogic(request.getCartID(),request.getItemID(),token);
 
         if(response != HttpStatus.OK)
@@ -47,10 +49,10 @@ public class CartController {
         return ResponseEntity.ok().body("Item adicionado");
     }
 
-    @GetMapping("/list/{id}")
-    public List<ProductModel> ListCartItens(@PathVariable UUID id)
+    @GetMapping("/list/")
+    public List<ProductModel> ListCartItens(@RequestBody CartDTO request)
     {
-        List<ProductModel> products = cartService.ListCartLogic(id);
+        List<ProductModel> products = cartService.ListCartLogic(request.getId());
         return products;
     }
 }

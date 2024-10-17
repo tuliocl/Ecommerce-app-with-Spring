@@ -32,12 +32,12 @@ public class SecurityConfiguration {
             httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable);
          })
         .authorizeHttpRequests(authorize -> authorize 
-            .requestMatchers(HttpMethod.POST,"/cart/att").permitAll()
-            .requestMatchers(HttpMethod.GET,"/cart/list/{}").permitAll()
+            .requestMatchers(HttpMethod.POST,"/cart/add").permitAll()
+            .requestMatchers(HttpMethod.GET,"/cart/list/").permitAll()
 
             .requestMatchers(HttpMethod.POST, "/products/add").hasRole("ADMIN")
-            .requestMatchers(HttpMethod.PUT, "{id}/att").hasRole("ADMIN")
-            .requestMatchers(HttpMethod.DELETE, "{id}/del").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.PUT, "/products/{id}/att").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.DELETE, "/products/{id}/del").hasRole("ADMIN")
             .requestMatchers(HttpMethod.GET, "/products/{id}/info").permitAll()
             .requestMatchers(HttpMethod.GET, "/products/listAll").permitAll()
             
